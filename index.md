@@ -1,37 +1,94 @@
-## Welcome to GitHub Pages
+#instalaciones necesarias
 
-You can use the [editor on GitHub](https://github.com/Jkillua-18/Primero_pasos/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+sudo apt install git
+sudo apt install curl
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+--------------------------------------------------------------------
 
-### Markdown
+sudo apt install neovim
+#Para instalar vim-plug ejecuta el siguiente comando en la terminal:
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+#Ahora abre tu archivo init.vim.
+nvim ~/.config/nvim/init.vim
 
-```markdown
-Syntax highlighted code block
+#Pega estos archivos dentro de init.vim
+#Esta es mi configuracion personal
 
-# Header 1
-## Header 2
-### Header 3
+syntax on
+set mouse=a
+set noerrorbells
+set number relativenumber
+set rnu
+set nowrap
+set noswapfile
+set nobackup
+set incsearch
+set clipboard=unnamedplus
+set encoding=utf-8
+set ignorecase
+set cursorline
+set noshowmode
+filetype plugin indent on
+set scrolloff=7
+set backspace=indent,eol,start
 
-- Bulleted
-- List
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+set fileformat=unix
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
+call plug#begin('~/.config/nvim/plugged')
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Plug 'morhetz/gruvbox' 
+Plug 'jiangmiao/auto-pairs'
 
-### Jekyll Themes
+Plug 'preservim/nerdtree'
+Plug 'Yggdroot/indentLine'
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Jkillua-18/Primero_pasos/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neco-syntax'  " Fuente general de auto completado
 
-### Support or Contact
+Plug 'ervandew/supertab'
+Plug 'Shougo/echodoc.vim'
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Plug 'sheerun/vim-polyglot'
+Plug 'haya14busa/incsearch.vim'
+
+
+call plug#end()
+
+colorscheme gruvbox
+
+let g:NERDTreeChDirMode = 2 
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+let g:indentLine_fileTypeExclude = ['text', 'sh', 'help', 'terminal']
+let g:indentLine_bufNameExclude = ['NERD_tree.*', 'term:.*']
+
+
+let g:deoplete#enable_at_startup = 1
+augroup deopleteCompleteDoneAu
+  autocmd!
+  autocmd CompleteDone * silent! pclose!
+augroup END
+
+let g:SuperTabDefaultCompletionType = '<c-n>'
+
+
+set noshowmode  " No mostrar el modo actual (echodoc hace uso de este espacio)
+
+" Activar echodoc al iniciar Neovim
+let g:echodoc_enable_at_startup = 1
+
+" Maps requeridos
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+
+" Quitar resaltado luego de buscar
+let g:incsearch#auto_nohlsearch = 1
