@@ -15,6 +15,9 @@ nvim ~/.config/nvim/init.vim
 #Pega estos archivos dentro de init.vim
 #Esta es mi configuracion personal
 
+
+set clipboard=unnamedplus
+set encoding=utf-8
 syntax on
 set mouse=a
 set noerrorbells
@@ -24,8 +27,6 @@ set nowrap
 set noswapfile
 set nobackup
 set incsearch
-set clipboard=unnamedplus
-set encoding=utf-8
 set ignorecase
 set cursorline
 set noshowmode
